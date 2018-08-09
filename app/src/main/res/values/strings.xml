@@ -3,4 +3,8 @@
     <string name="trainee_button">Trainee button</string>
     <string name="button">Button</string>
     <string name="show_text">Show text</string>
+    <string name="pass_data_to_the_next_activity">Pass data to the next activity</string>
+    <string name="enter_data">Enter Data</string>
+    <string name="pass_result_data_back_to_source_activity">Pass Result Data Back To Source Activity</string>
+    <string name="pass_data_and_get_result_back">Pass Data And Get Result Back</string>
 </resources>
