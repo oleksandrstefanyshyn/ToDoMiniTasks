@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mDownloadButton;
     private EditText mDownloadEditText;
+    private EditText mSemaphoreditText;
     private ListView mListView;
     private ImageDownloadAdapter mAdapter;
 
@@ -36,11 +37,15 @@ public class MainActivity extends AppCompatActivity {
         mDownloadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int editedNumber = Integer.valueOf(mDownloadEditText.getText().toString());
+                int editedNumberParties = Integer.valueOf(mDownloadEditText.getText().toString());
+                int editedNumberSemaphore = Integer.valueOf(mDownloadEditText.getText().toString());
                 count++;
                 Log.d(TAG, "Count: " + count);
-                if (count == editedNumber) {
-                    mAdapter.setmSize(Integer.valueOf(mDownloadEditText.getText().toString()));
+                if (count == editedNumberParties) {
+                    mAdapter.setmSize(editedNumberParties);
+                }
+                if (count == editedNumberSemaphore) {
+                    mAdapter.setmSemaphoreSize(editedNumberSemaphore);
                 }
             }
         });
@@ -50,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         mDownloadButton = findViewById(R.id.b_main);
         mDownloadEditText = findViewById(R.id.ed_parties);
         mListView = findViewById(R.id.list_view);
+        mSemaphoreditText = findViewById(R.id.ed_semaphore);
     }
 }
 

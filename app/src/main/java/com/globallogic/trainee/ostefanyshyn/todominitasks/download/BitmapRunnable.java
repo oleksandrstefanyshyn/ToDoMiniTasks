@@ -10,6 +10,7 @@ import com.globallogic.trainee.ostefanyshyn.todominitasks.util.ConnectionUtils;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Semaphore;
 
 public class BitmapRunnable implements Runnable {
 
@@ -19,19 +20,22 @@ public class BitmapRunnable implements Runnable {
     private String mUrl;
     private Handler mDownloadHandler;
     private CyclicBarrier cyclicBarrier;
+    private Semaphore semaphore;
 
-    public BitmapRunnable(String mUrl, Handler mDownloadHandler, CyclicBarrier cyclicBarrier) {
+    public BitmapRunnable(String mUrl, Handler mDownloadHandler, CyclicBarrier cyclicBarrier, Semaphore semaphore) {
         this.mUrl = mUrl;
         this.mDownloadHandler = mDownloadHandler;
         this.cyclicBarrier = cyclicBarrier;
+        this.semaphore = semaphore;
     }
 
     @Override
     public void run() {
         try {
             cyclicBarrier.await();
-            Log.d(TAG, "run, await");
-
+            Log.d(TAG, "run, await()");
+            semaphore.acquire();
+            Log.d(TAG, "run, acquire()");
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (BrokenBarrierException e) {
@@ -45,6 +49,9 @@ public class BitmapRunnable implements Runnable {
         Message mMessage = mDownloadHandler.obtainMessage();
         mMessage.setData(bundle);
         mDownloadHandler.sendMessage(mMessage);
+        Log.d(TAG, "run, before semaphore.release()");
+        semaphore.release();
+        Log.d(TAG, "run, after semaphore.release()");
     }
 
     public static Bitmap getBitmap(Bundle bundle) {

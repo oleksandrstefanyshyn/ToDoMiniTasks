@@ -16,6 +16,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+<EditText
+        android:id="@+id/ed_semaphore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"

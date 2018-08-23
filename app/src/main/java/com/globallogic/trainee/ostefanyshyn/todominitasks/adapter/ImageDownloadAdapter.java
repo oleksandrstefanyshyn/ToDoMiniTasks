@@ -12,13 +12,16 @@ import com.globallogic.trainee.ostefanyshyn.todominitasks.R;
 
 import java.util.List;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Semaphore;
 
 public class ImageDownloadAdapter extends BaseAdapter {
 
-    private static final int BARRIER_COUNT = 10;
+    private static final int COUNT = 10;
 
-    private int mSize = BARRIER_COUNT;
+    private int mSemaphoreSize = COUNT;
+    private int mSize = COUNT;
     private CyclicBarrier cyclicBarrier = new CyclicBarrier(mSize);
+    private Semaphore mSemaphore = new Semaphore(mSemaphoreSize, true);
     private List<String> listUrl;
 
     public ImageDownloadAdapter(List<String> listUrl) {
@@ -56,9 +59,15 @@ public class ImageDownloadAdapter extends BaseAdapter {
         cyclicBarrier = new CyclicBarrier(mSize);
     }
 
+    public void setmSemaphoreSize(int mSemaphoreSize) {
+        this.mSemaphoreSize = mSemaphoreSize;
+        notifyDataSetChanged();
+        mSemaphore = new Semaphore(mSemaphoreSize);
+    }
+
     private void downloadBitmap(ImageView imageView, String url) {
         DownloadHandler downloadHandler = new DownloadHandler(imageView);
-        Thread thread = new Thread(new BitmapRunnable(url, downloadHandler, cyclicBarrier));
+        Thread thread = new Thread(new BitmapRunnable(url, downloadHandler, cyclicBarrier, mSemaphore));
         thread.start();
     }
 }
