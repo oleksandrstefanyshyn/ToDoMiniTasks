@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">ToDoMiniTasks</string>
     <string name="download">Download</string>
+    <string name="first">https://tesla-group.com.ua/wp-content/themes/theme-tessla/img/model-select-modelx.png</string>
+    <string name="second">https://st.motortrendenespanol.com/uploads/sites/10/2017/09/2018-chevrolet-volt-lt-hatchback-angular-front.png</string>
+    <string name="countdown">Countdown</string>
     <string-array name="images_urls">
         <item>https://tesla-group.com.ua/wp-content/themes/theme-tessla/img/model-select-modelx.png</item>
         <item>https://m.media-amazon.com/images/I/71+t6q+mqLL._UY560_.jpg</item>

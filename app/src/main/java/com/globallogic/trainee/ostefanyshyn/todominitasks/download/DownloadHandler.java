@@ -3,22 +3,24 @@ package com.globallogic.trainee.ostefanyshyn.todominitasks.download;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 public class DownloadHandler extends Handler {
 
     private static String TAG = DownloadHandler.class.getSimpleName();
 
-    private ImageView mTargetImageView;
+    private Bitmap mBitmap;
 
-    public DownloadHandler(ImageView mTargetImageView) {
-        this.mTargetImageView = mTargetImageView;
+    public DownloadHandler() {
     }
 
     @Override
     public void handleMessage(Message msg) {
         super.handleMessage(msg);
-        Bitmap bitmap = BitmapRunnable.getBitmap(msg.getData());
-        mTargetImageView.setImageBitmap(bitmap);
+        mBitmap = BitmapRunnable.getBitmap(msg.getData());
+    }
+
+    public Bitmap getDownloadBitmap() {
+        return mBitmap;
     }
 }

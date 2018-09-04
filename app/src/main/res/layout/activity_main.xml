@@ -5,24 +5,41 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/b_main"
+        android:id="@+id/b_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/download"/>
 
-    <EditText
-        android:id="@+id/ed_parties"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/b_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/countdown"/>
 
-<EditText
-        android:id="@+id/ed_semaphore"
+    <TextView
+        android:id="@+id/tv_first"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
 
-    <ListView
-        android:id="@+id/list_view"
+    <TextView
+        android:id="@+id/tv_second"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+
+    <ImageView
+        android:id="@+id/iv_download_f"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"/>
+    <ImageView
+        android:id="@+id/iv_download_s"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"/>
 </LinearLayout>

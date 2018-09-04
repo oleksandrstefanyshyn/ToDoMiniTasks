@@ -8,9 +8,7 @@ import android.util.Log;
 
 import com.globallogic.trainee.ostefanyshyn.todominitasks.util.ConnectionUtils;
 
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.CountDownLatch;
 
 public class BitmapRunnable implements Runnable {
 
@@ -19,39 +17,29 @@ public class BitmapRunnable implements Runnable {
 
     private String mUrl;
     private Handler mDownloadHandler;
-    private CyclicBarrier cyclicBarrier;
-    private Semaphore semaphore;
+    private CountDownLatch mCountDownLatch;
 
-    public BitmapRunnable(String mUrl, Handler mDownloadHandler, CyclicBarrier cyclicBarrier, Semaphore semaphore) {
-        this.mUrl = mUrl;
+    public BitmapRunnable(String url, Handler mDownloadHandler, CountDownLatch countDownLatch) {
+        this.mUrl = url;
         this.mDownloadHandler = mDownloadHandler;
-        this.cyclicBarrier = cyclicBarrier;
-        this.semaphore = semaphore;
+        this.mCountDownLatch = countDownLatch;
     }
 
     @Override
     public void run() {
+        mCountDownLatch.countDown();
+        Bitmap bitmap = ConnectionUtils.getBitmapFromUrl(mUrl);
         try {
-            cyclicBarrier.await();
-            Log.d(TAG, "run, await()");
-            semaphore.acquire();
-            Log.d(TAG, "run, acquire()");
+            mCountDownLatch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        } catch (BrokenBarrierException e) {
-            e.printStackTrace();
         }
-
-        Bitmap bitmap = ConnectionUtils.getBitmapFromUrl(mUrl);
         Log.d(TAG, "run, bitmap downloaded");
         Bundle bundle = new Bundle();
         bundle.putParcelable(KEY_BITMAP, bitmap);
         Message mMessage = mDownloadHandler.obtainMessage();
         mMessage.setData(bundle);
         mDownloadHandler.sendMessage(mMessage);
-        Log.d(TAG, "run, before semaphore.release()");
-        semaphore.release();
-        Log.d(TAG, "run, after semaphore.release()");
     }
 
     public static Bitmap getBitmap(Bundle bundle) {
