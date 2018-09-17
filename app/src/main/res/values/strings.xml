@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">ToDoMiniTasks</string>
     <string name="animation">Animation</string>
-    <string name="move">Move</string>
-    <string name="scale_out">Scale out</string>
-    <string name="scale_in">Scale in</string>
-    <string name="rotate">Rotate</string>
+    <string name="several_properties">Several Properties</string>
 </resources>

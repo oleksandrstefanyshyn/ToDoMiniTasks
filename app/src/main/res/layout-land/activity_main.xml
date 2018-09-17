@@ -24,32 +24,11 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_move"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/move"/>
-
-        <Button
-            android:id="@+id/btn_scale_in"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/scale_out"/>
-
-        <Button
-            android:id="@+id/btn_scale_out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/scale_in"/>
-
-        <Button
             android:id="@+id/btn_rotate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/rotate"/>
+            android:text="@string/several_properties"/>
 
     </LinearLayout>
 
