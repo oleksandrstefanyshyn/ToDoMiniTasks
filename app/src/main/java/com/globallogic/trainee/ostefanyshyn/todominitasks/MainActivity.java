@@ -1,5 +1,6 @@
 package com.globallogic.trainee.ostefanyshyn.todominitasks;
 
+import android.animation.ObjectAnimator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,16 +13,22 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TRANSLATION = "translationX";
+    public static final String SCALE = "scaleX";
+    public static final String ROTATION = "rotation";
+    public static final long DURATION = 1000;
+    public static final float SCALE_STATE = 1f;
+    public static final float SCALE_MAX = 1.5f;
+    public static final float SCALE_MIN = 0.5f;
+    public static final float ROTATE_MIN = 0f;
+    public static final float ROTATE_MAX = 360f;
+    public static final float TRANSL= 800f;
+
     private TextView mTextViewAnimation;
     private Button mButtonMove;
     private Button mButtonScaleIn;
     private Button mButtonScaleOut;
     private Button mButtonRotate;
-
-    private Animation mAnimMove;
-    private Animation mAnimScaleIn;
-    private Animation mAnimScaleOut;
-    private Animation mAnimRotate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,18 +36,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initViews();
-        loadAnimations();
         moveAnimation();
         zoomInAnimation();
         zoomOutAnimation();
         rotateAnimation();
-    }
-
-    private void loadAnimations() {
-        mAnimMove = AnimationUtils.loadAnimation(this, R.anim.move);
-        mAnimScaleIn = AnimationUtils.loadAnimation(this, R.anim.zoom_in);
-        mAnimScaleOut = AnimationUtils.loadAnimation(this, R.anim.zoom_out);
-        mAnimRotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
     }
 
     private void initViews() {
@@ -51,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
         mButtonRotate = findViewById(R.id.btn_rotate);
     }
 
-
     private void moveAnimation() {
         mButtonMove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTextViewAnimation.startAnimation(mAnimMove);
+                ObjectAnimator.ofFloat(mTextViewAnimation, TRANSLATION, -TRANSL, TRANSL)
+                        .setDuration(DURATION).start();
             }
         });
     }
@@ -65,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
         mButtonScaleIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTextViewAnimation.startAnimation(mAnimScaleIn);
+                ObjectAnimator.ofFloat(mTextViewAnimation, SCALE, SCALE_STATE, SCALE_MAX)
+                        .setDuration(DURATION).start();
             }
         });
     }
@@ -74,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
         mButtonScaleOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTextViewAnimation.startAnimation(mAnimScaleOut);
+                ObjectAnimator.ofFloat(mTextViewAnimation, SCALE, SCALE_STATE, SCALE_MIN)
+                        .setDuration(DURATION).start();
             }
         });
     }
@@ -83,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
         mButtonRotate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTextViewAnimation.startAnimation(mAnimRotate);
+                ObjectAnimator.ofFloat(mTextViewAnimation, ROTATION, ROTATE_MIN, ROTATE_MAX)
+                        .setDuration(DURATION).start();
             }
         });
     }
